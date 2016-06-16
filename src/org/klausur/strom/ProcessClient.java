@@ -12,18 +12,33 @@ import java.util.Collections;
 public class ProcessClient implements Runnable{
 	
 	private Socket client;
+	private OutputStreamWriter osw;
+	private PrintWriter pw;
 	StromRepository sr = new StromRepository();
 
 	public ProcessClient(Socket client) {
 		super();
 		this.client = client;
+		try {
+			this.osw = new OutputStreamWriter(client.getOutputStream());
+			this.pw = new PrintWriter(osw);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public OutputStreamWriter getOsw() {
+		return osw;
+	}
+
+	public PrintWriter getPw() {
+		return pw;
 	}
 
 	@Override
 	public void run() {
 		try (
-			OutputStreamWriter osw = new OutputStreamWriter(client.getOutputStream());
-			PrintWriter pw = new PrintWriter(osw);
 			InputStreamReader isr = new InputStreamReader(client.getInputStream());
 			BufferedReader br = new BufferedReader(isr);
 			) {
@@ -68,9 +83,12 @@ public class ProcessClient implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		try {
+			this.client.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	
-
 }
