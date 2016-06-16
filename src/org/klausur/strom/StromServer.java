@@ -18,7 +18,7 @@ public class StromServer {
 		try (
 			ServerSocket server = new ServerSocket(1111);
 			) {
-			ServerConsole sc = new ServerConsole(server);
+			ServerConsole sc = new ServerConsole();
 			Thread ts = new Thread(sc);
 			ts.start();
 			
@@ -35,7 +35,5 @@ public class StromServer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
-
 }

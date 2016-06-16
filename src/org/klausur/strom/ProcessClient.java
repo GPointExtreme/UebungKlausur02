@@ -28,10 +28,6 @@ public class ProcessClient implements Runnable{
 		}
 	}
 
-	public OutputStreamWriter getOsw() {
-		return osw;
-	}
-
 	public PrintWriter getPw() {
 		return pw;
 	}
@@ -89,6 +85,5 @@ public class ProcessClient implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
+	}	
 }
